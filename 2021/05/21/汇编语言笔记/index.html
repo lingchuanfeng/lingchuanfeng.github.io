@@ -218,7 +218,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      2.5k 字
     </span>
   
 
@@ -228,7 +228,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      50
+      54
        分钟
     </span>
   
@@ -270,7 +270,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：几秒前
+                  本文最后更新于：2 分钟前
                 
               </p>
             
@@ -349,7 +349,22 @@
           </div>
 
 <p>例：<br><code>jmp 2AE3:0B16</code><br>执行后<br><code>CS=2AE3H,IP=0B16H</code><br>CPU将从2AE30B16处读取指令</p>
-<p>“jmp段地址:偏移地址”指令的功能为:用指令中给出的段地址修改CS，偏移地<br>址修改IP。</p>
+<p>“jmp段地址:偏移地址”指令的功能为:用指令中给出的段地址修改CS，偏移地址修改IP。</p>
+<div class="note note-success">
+            <p><code>jmp ，某一合法寄存器</code></p>
+          </div>
+<p>功能为：用寄存器中的值修改IP<br>例：<code>jmp ax</code>类似 <code>mov IP,ax</code></p>
+<h3 id="2-8小结"><a href="#2-8小结" class="headerlink" title="2.8小结"></a>2.8小结</h3><ol>
+<li>段地址在8086CPU的段寄存器中存放。当8086CPU要访问内存时，由段寄存器提供内存单元的段地址。8086CPU有4个段寄存器，其中CS用来存放指令的段地址。</li>
+<li> CS存放指令的段地址，IP存放指令的偏移地址。8086机中，任意时刻，CPU将CS : IP指向的内容当作指令执行。</li>
+<li>8086CPU的工作过程:<ul>
+<li>从CS: IP 指向的内存单元读取指令，读取的指令进入指令缓冲器;</li>
+<li>IP指向下一条指令;</li>
+<li>执行指令。(转到步骤①，重复这个过程。)</li>
+</ul>
+</li>
+<li>8086CPU提供转移指令修改CS、IP的内容。</li>
+</ol>
 
             </div>
             <hr>
