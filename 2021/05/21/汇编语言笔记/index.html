@@ -218,7 +218,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.5k 字
+      4.5k 字
     </span>
   
 
@@ -228,7 +228,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      76
+      99
        分钟
     </span>
   
@@ -270,7 +270,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 分钟前
+                  本文最后更新于：10 小时前
                 
               </p>
             
@@ -391,6 +391,30 @@
 <p>8086CPU中，有两个寄存器，段寄存器SS和寄存器SP，栈顶的段地址存放在SS中，偏移地址存放在SP中。<strong>任意时刻，SS:SP 指向栈顶元素。</strong>push 指令和pop指令执行时，CPU从SS和SP中得到栈顶的地址。</p>
 <p>例如push ax的执行，可以分为两步执行<br>(1)SP=SP-2，SS : SP指向当前栈顶前面的单元，以当前栈项前面的单元为新的栈顶;<br>(2)将ax中的内容送入SS:SP 指向的内存单元处，SS:SP 此时指向新栈顶。</p>
 <p><img src="/img/blog/CS%E7%AC%94%E8%AE%B0/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/3-10.jpg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="3-8-push、pop指令"><a href="#3-8-push、pop指令" class="headerlink" title="3.8 push、pop指令"></a>3.8 push、pop指令</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-keyword">push</span> 寄存器	；将一个寄存器中的数据入栈<br><span class="hljs-keyword">pop</span>  寄存器	；出栈，用一个寄存器接收出栈的数据<br><br><span class="hljs-keyword">push</span> 段寄存器  ；将一个段寄存器中的数据入栈<br><span class="hljs-keyword">pop</span> 段寄存器   ；出栈，用一个段寄存器接收出栈的数据<br><br><span class="hljs-keyword">push</span> 内存单元  ；将一个内存字单元处的字入栈（栈操作都是以字为单位）<br><span class="hljs-keyword">pop</span> 内存单元   ；出栈，用一个内存字单元接收出栈的数据<br><br></code></pre></td></tr></table></figure>
+<p>比如：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>，<span class="hljs-number">1000H</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ds</span>，<span class="hljs-built_in">ax</span>	；内存单元的段地址要放在<span class="hljs-built_in">ds</span>中<br><span class="hljs-keyword">push</span> [<span class="hljs-number">0</span>]	  ；将<span class="hljs-number">1000</span>：<span class="hljs-number">0</span>处的字压入栈中<br><span class="hljs-keyword">pop</span>[<span class="hljs-number">2</span>]		；出栈，出栈的数据送入<span class="hljs-number">1000</span>：<span class="hljs-number">2</span>处<br></code></pre></td></tr></table></figure>
+
+<p><strong><center>栈的综述</center></strong><br>    (1) 8086CPU提供了栈操作机制，方案如下。<br>    在SS、SP中存放栈顶的段地址和偏移地址;<br>    提供入栈和出栈指令，它们根据SS:SP指示的地址，按照栈的方式访问内存单元。<br>    (2) push指令的执行步骤:①SP=SP-2;②向SS:SP指向的字单元中送入数据。<br>    (3) pop指令的执行步骤:①从SS:SP指向的字单元中读取数据:②SP=SP+2。<br>    (4)任意时刻，SS:SP指向栈顶元素。<br>    (5) 8086CPU只记录栈顶，栈空间的大小我们要自己管理。<br>    (6)用栈来暂存以后需要恢复的寄存器的内容时，寄存器出栈的顺序要和入栈的顺序相反。<br>    (7) push、pop实质上是一种内存传送指令，注意它们的灵活应用。<br>    栈是一种非常重要的机制，一定要深入理解，灵活掌握。</p>
+<h3 id="3-9-栈段"><a href="#3-9-栈段" class="headerlink" title="3.9 栈段"></a>3.9 栈段</h3><p>将一组内存单元定义为一个段。<br>我们可以将长度为N(N≤64KB)的一组地址连续、起始地址为16的倍数的内存单元，当作栈空间来用，从而定义了一个栈段。<br>比如，我们将10010H~1001FH 这段长度为16字节的内存空间当作栈来用，以栈的方式进行访问。这段空间就可以称为一个栈段，段地址为1001H， 大小为16字节。</p>
+<h1 id="第四章·第一个程序"><a href="#第四章·第一个程序" class="headerlink" title="第四章·第一个程序"></a>第四章·第一个程序</h1><h3 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h3><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-meta">assume</span> <span class="hljs-built_in">cs</span>: codesg<br>codesg <span class="hljs-meta">segment</span><br><br>		<span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>, <span class="hljs-number">0123H</span><br>		<span class="hljs-keyword">mov</span> <span class="hljs-built_in">bx</span>, <span class="hljs-number">0456H</span><br>		<span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>,<span class="hljs-built_in">bx</span> <br>		<span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>, <span class="hljs-built_in">ax</span><br>		<span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>, <span class="hljs-number">4c00H</span><br>		<span class="hljs-keyword">int</span> <span class="hljs-number">21H</span><br>		<br>codesg ends<br>end<br></code></pre></td></tr></table></figure>
+<ul>
+<li>伪指令<br>  在汇编语言源程序中，包含两种指令，一种是汇编指令，一种是伪指令。汇编指令是有对应的机器码的指令，可以被编译为机器指令，最终为CPU所执行。而伪指令没有对应的机器指令，最终不被CPU所执行。伪指令是由编译器来执行的指令，编译器根据伪指令来进行相关的编译工作。</li>
+</ul>
+<ol>
+<li>segment——ends<br>segment和ends是一对承兑使用的伪指令，在写可被编译器编译的汇编程序时，必须要用到一对伪指令，segment和ends的功能时定义一个段，segment说明一个段开始，ends说明一个段结束。一个段必须有一个名称来标识，格式为：<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">段名 <span class="hljs-keyword">segment</span><br>   ：<br>段名 <span class="hljs-keyword">ends</span><br></code></pre></td></tr></table></figure>
+一个汇编程序是由多个段组成，一个有意义的汇编程序至少要有一个段，用来存放代码</li>
+<li>end<br> 汇编程序的结束标记</li>
+<li>assume<br> “假设”,假设某一段寄存器和程序中的某一个段相关联</li>
+</ol>
+<p>源程序文件中的所有内容称为源程序，将源程序中最终由计算机执行、处理的指令或数据，称为程序。程序最先以汇编指令的形式存在源程序中，经编译、连接后转变为机器码，存储在可执行文件中。<br>4-2</p>
+<p>再来一个例子，编程运算2^3,</p>
+<ol>
+<li>定义一个段，名称为abc<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">abc <span class="hljs-keyword">segment</span><br>	 ：<br>abc <span class="hljs-keyword">ends</span><br></code></pre></td></tr></table></figure></li>
+<li>写入汇编指令<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">abc <span class="hljs-meta">segment</span><br><br>	 <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>，<span class="hljs-number">2</span><br>	 <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>，<span class="hljs-built_in">ax</span><br>	 <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>，<span class="hljs-built_in">ax</span><br>	 <br>abc ends<br></code></pre></td></tr></table></figure></li>
+<li>指出结束位置<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">abc <span class="hljs-meta">segment</span><br><br>	 <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>，<span class="hljs-number">2</span><br>	 <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>，<span class="hljs-built_in">ax</span><br>	 <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>，<span class="hljs-built_in">ax</span><br>	 <br>abc ends<br>end<br></code></pre></td></tr></table></figure></li>
+<li>将abc与cs联系起来<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-meta">assume</span> <span class="hljs-built_in">cs</span>：abc<br>abc <span class="hljs-meta">segment</span><br><br>	 <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>，<span class="hljs-number">2</span><br>	 <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>，<span class="hljs-built_in">ax</span><br>	 <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>，<span class="hljs-built_in">ax</span> <br>	 <br>abc ends<br>end<br></code></pre></td></tr></table></figure></li>
+</ol>
 
             </div>
             <hr>
