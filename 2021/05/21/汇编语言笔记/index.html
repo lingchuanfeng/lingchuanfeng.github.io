@@ -218,7 +218,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.5k 字
+      5.2k 字
     </span>
   
 
@@ -228,7 +228,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      99
+      118
        分钟
     </span>
   
@@ -270,7 +270,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：10 小时前
+                  本文最后更新于：几秒前
                 
               </p>
             
@@ -415,7 +415,35 @@
 <li>指出结束位置<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">abc <span class="hljs-meta">segment</span><br><br>	 <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>，<span class="hljs-number">2</span><br>	 <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>，<span class="hljs-built_in">ax</span><br>	 <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>，<span class="hljs-built_in">ax</span><br>	 <br>abc ends<br>end<br></code></pre></td></tr></table></figure></li>
 <li>将abc与cs联系起来<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-meta">assume</span> <span class="hljs-built_in">cs</span>：abc<br>abc <span class="hljs-meta">segment</span><br><br>	 <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>，<span class="hljs-number">2</span><br>	 <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>，<span class="hljs-built_in">ax</span><br>	 <span class="hljs-keyword">add</span> <span class="hljs-built_in">ax</span>，<span class="hljs-built_in">ax</span> <br>	 <br>abc ends<br>end<br></code></pre></td></tr></table></figure></li>
 </ol>
+<h1 id="第五章·-BX-和loop指令"><a href="#第五章·-BX-和loop指令" class="headerlink" title="第五章·[BX]和loop指令"></a>第五章·[BX]和loop指令</h1><p><strong>1. [bx]和内存单元的描述</strong><br>描述一个内存单元，需要两种信息:<br>①内存单元的地址;②内存单元的长度(类型)。<br>[bx]同样也表示一个内存单元，它的偏移地址在bx中，比如下面的指令:<br><code>mov ax, [bx]</code><br>将一个内存单元的内容送入ax， 这个内存单元的长度为2字节(字单元)，存放一个字，偏移地址在bx中，段地址在ds中。<br><strong>2. loop</strong><br>循环<br><strong>3. “()”</strong><br>比如(ax)并表示ax中的内容<br>“()”元素有3种类型：<br>①寄存器名<br>②段寄存器名<br>③内存单元的物理地址</p>
+<p>(ax)、(ds)、（al）、(20000H)、 ((ds)* 16+(bx))等是正确的用法;<br>(2000:0)、((ds):1000H)等 是不正确的用法。</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-number">2000</span>:<span class="hljs-number">1000</span> 处内容为<span class="hljs-number">0010H</span> 描述:<br>(<span class="hljs-number">21000H</span>)=<span class="hljs-number">0010H</span><span class="hljs-comment">;</span><br><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,[<span class="hljs-number">2</span>]的功能描述:<br>(<span class="hljs-built_in">ax</span>)=((<span class="hljs-built_in">ds</span>)* <span class="hljs-number">16</span>+<span class="hljs-number">2</span>)<span class="hljs-comment">;</span><br><br><span class="hljs-keyword">mov</span> [<span class="hljs-number">2</span>],<span class="hljs-built_in">ax</span>的功能描述: <br>((<span class="hljs-built_in">ds</span>)*<span class="hljs-number">16</span>+<span class="hljs-number">2</span>)=(<span class="hljs-built_in">ax</span>)<span class="hljs-comment">;</span><br><br><span class="hljs-keyword">push</span> <span class="hljs-built_in">ax</span>的功能描述:<br>(<span class="hljs-built_in">sp</span>)=(<span class="hljs-built_in">sp</span>)-<span class="hljs-number">2</span> <br>((<span class="hljs-built_in">ss</span>)* <span class="hljs-number">16</span>+(<span class="hljs-built_in">sp</span>))=(<span class="hljs-built_in">ax</span>)<br><br>对于<span class="hljs-keyword">pop</span> <span class="hljs-built_in">ax</span>的功能描述:<br>(<span class="hljs-built_in">ax</span>)=((<span class="hljs-built_in">ss</span>)* <span class="hljs-number">16</span>+(<span class="hljs-built_in">sp</span>))<br>(<span class="hljs-built_in">sp</span>)=(<span class="hljs-built_in">sp</span>)+<span class="hljs-number">2</span><br><br></code></pre></td></tr></table></figure>
+<p>“(X)”所表示的数据有两种类型:①字节②字。 是哪种类型由寄存器名或具体的运算决定，比如:</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><span class="hljs-comment">(al)</span>、<span class="hljs-comment">(bl)</span>、<span class="hljs-comment">(cI)</span>等得到的数据为字节型; <br><span class="hljs-comment">(ds)</span>、<span class="hljs-comment">(ax)</span>、<span class="hljs-comment">(bx)</span>等得到的数据为字型。<br><span class="hljs-comment">(al)</span>=<span class="hljs-comment">(20000H)</span>，则<span class="hljs-comment">(20000H)</span>得到的数据为字节型;<br><span class="hljs-comment">(ax)</span>=<span class="hljs-comment">(20000H)</span>，则<span class="hljs-comment">(20000H)</span>得到的数据为字型。<br></code></pre></td></tr></table></figure>
 
+<p><strong>4. 约定符号idata表示常量</strong><br>指令中，在“[..]”里用一个常量0表示内存单元的偏移地址。以后，我们用idata 表示常量。比如:</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,[idata]就代表<br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,[<span class="hljs-number">1</span>]、<span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,[<span class="hljs-number">2</span>]、<span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,[<span class="hljs-number">3</span>]<br><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">bx</span>,idata就代表<br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">bx</span>,<span class="hljs-number">1</span>、<span class="hljs-keyword">mov</span> <span class="hljs-built_in">bx</span>,<span class="hljs-number">2</span>、<span class="hljs-keyword">mov</span> <span class="hljs-built_in">bx</span>,<span class="hljs-number">3</span>等。<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-1-BX"><a href="#5-1-BX" class="headerlink" title="5.1 [BX]"></a>5.1 [BX]</h3><p><code>mov ax, [bx]</code><br>功能: bx 中存放的数据作为一个偏移地址EA，段地址SA默认在ds中，将SA:EA<br>处的数据送入ax中。<br>即: (ax)=((ds)*16+(bx))。</p>
+<p><code>mov [bx] ,ax</code><br>功能: bx中存放的数据作为一个偏移地址EA，段地址SA默认在ds中,将ax中的数据送入内存SA : EA处。<br>即: ((ds)*16+(bx))=(ax)。</p>
+<p>例：程序和内存如图所示，写出程序执行后，21000H~21007H 单元中的内容。<br><img src="/img/blog/CS%E7%AC%94%E8%AE%B0/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/5-1.jpg" srcset="/img/loading.gif" lazyload><br>分析：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,<span class="hljs-number">2000H</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ds</span>,<span class="hljs-built_in">ax</span><br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">bx</span>,<span class="hljs-number">1000H</span><br></code></pre></td></tr></table></figure>
+<p>执行后：ds=2000H,bx=1000H</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,[<span class="hljs-built_in">bx</span>]<br></code></pre></td></tr></table></figure>
+<p>执行前：内存2000:1000处的字型数据送入ax中<br>执行后：ax=00beH</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">inc</span> <span class="hljs-built_in">bx</span><br><span class="hljs-keyword">inc</span> <span class="hljs-built_in">bx</span><br></code></pre></td></tr></table></figure>
+<p>(inc bx 含义时bx中的内容加1)<br>执行前：bx=1000H<br>执行后：bx=1002H</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> [<span class="hljs-built_in">bx</span>],<span class="hljs-built_in">ax</span><br></code></pre></td></tr></table></figure>
+<p>执行前：ds=2000H,bx=1002H。ax数据送入内存2000:1004处<br>执行后：2000：1004单元内容为BE，2000：1005单元的内容为00</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">inc</span> <span class="hljs-built_in">bx</span><br></code></pre></td></tr></table></figure>
+<p>执行前：bx=1004H<br>执行后：bx=1005H</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> [<span class="hljs-built_in">bx</span>],<span class="hljs-built_in">al</span><br></code></pre></td></tr></table></figure>
+<p>执行前：ds=2000H，bx=1005H，al数据送入内存2000：1005处<br>执行后：2000：1005单元的内容为BE</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">inc</span> <span class="hljs-built_in">bx</span><br></code></pre></td></tr></table></figure>
+<p>执行前：bx=1005H<br>执行后：bx=1006H</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> [<span class="hljs-built_in">bx</span>],<span class="hljs-built_in">al</span><br></code></pre></td></tr></table></figure>
+<p>执行前：ds=2000H，bx=1006H， al数据送入内存2000：1006处<br>执行手后：2000：1006处单元内容为BE<br><img src="/img/blog/CS%E7%AC%94%E8%AE%B0/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/5-2.jpg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="5-2-Loop指令"><a href="#5-2-Loop指令" class="headerlink" title="5.2 Loop指令"></a>5.2 Loop指令</h3>
             </div>
             <hr>
             <div>
