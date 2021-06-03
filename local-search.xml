@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>LaTeX数学公式</title>
+    <link href="/2021/06/03/LaTeX%E7%BB%83%E4%B9%A0/"/>
+    <url>/2021/06/03/LaTeX%E7%BB%83%E4%B9%A0/</url>
+    
+    <content type="html"><![CDATA[<p>基本积分公式：<br>$\int adx=ax+C$</p><p>$\int x^{u}dx= \frac{1}{u+1} x^{u+1} + C$</p><p>$\int \frac{1}{x}\mathrm{d}x= \ln \left| x \right| +C$</p><p>$\int \sqrt[]{x}dx=\frac{2}{3}x^{\frac{3}{2} }+C   $</p><p>$\int \frac{1}{\sqrt{x} } dx=2\sqrt[]{x} +C $</p><p>$\int \frac{1}{x^{2} }  dx=-\frac{1}{x}+C $</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习笔记</category>
+      
+      <category>高数笔记</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>乌合麒麟作品</title>
     <link href="/2021/05/23/%E4%B9%8C%E5%90%88%E9%BA%92%E9%BA%9F%E4%BD%9C%E5%93%81/"/>
     <url>/2021/05/23/%E4%B9%8C%E5%90%88%E9%BA%92%E9%BA%9F%E4%BD%9C%E5%93%81/</url>
