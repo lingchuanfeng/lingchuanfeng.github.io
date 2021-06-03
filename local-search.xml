@@ -8,7 +8,7 @@
     <link href="/2021/06/03/LaTeX%E7%BB%83%E4%B9%A0/"/>
     <url>/2021/06/03/LaTeX%E7%BB%83%E4%B9%A0/</url>
     
-    <content type="html"><![CDATA[<p>基本积分公式：<br>$\int adx=ax+C$</p><p>$\int x^{u}dx= \frac{1}{u+1} x^{u+1} + C$</p><p>$\int \frac{1}{x}\mathrm{d}x= \ln \left| x \right| +C$</p><p>$\int \sqrt[]{x}dx=\frac{2}{3}x^{\frac{3}{2} }+C   $</p><p>$\int \frac{1}{\sqrt{x} } dx=2\sqrt[]{x} +C $</p><p>$\int \frac{1}{x^{2} }  dx=-\frac{1}{x}+C $</p>]]></content>
+    <content type="html"><![CDATA[<p>基本积分公式：</p><p>$\int adx=ax+C$</p><p>$\int x^{u}dx= \frac{1}{u+1} x^{u+1} + C$</p><p>$\int \frac{1}{x}\mathrm{d}x= \ln \left| x \right| +C$</p><p>$\int \sqrt[]{x}dx=\frac{2}{3}x^{\frac{3}{2} }+C   $</p><p>$\int \frac{1}{\sqrt{x} } dx=2\sqrt[]{x} +C $</p><p>$\int \frac{1}{x^{2} }  dx=-\frac{1}{x}+C $</p><p>$\int a^{x}dx=\frac{1}{\ln a}a^{x} +C$</p><p>$\int e^{x}dx=e^{x}+C$</p><p>$\int sinxdx=-cosx+C$</p><p>$\int cosxdx=sinx +C$</p><p>$\int tanxdx=-\ln |cosx|+C$</p><p>$\int cscxdx=\ln |cscx-cotx|+C$</p><p>$\int secxdx=\ln |secs+tanx|+C$</p><p>$\int cotxdx=\ln |sinx|+C$</p><p>$\int sec^{2}xdx=tanx+C$</p><p>$\int csc^{2}xdx=-cotx+C$</p><p>$\int secxtanxdx=secx+C$</p><p>$\int cscxcotxdx=-cscx+C$</p><p>$\int \frac{1}{\sqrt{1-x^{2}} }dx=arcsinx+C $</p><p>$\int \frac{1}{\sqrt{a^{2}-x^{2}}}dx=arcsin\frac{x}{a}+C$</p><p>$\int \frac{1}{1+x^{2}}dx=arctanx+C$</p><p>$\int \frac{1}{a^{2}+x^{2}}dx = \frac{1}{a}arctan\frac{x}{a}+C$</p><p>$\int \frac{1}{x^{2}-a^{2}}dx=\frac{1}{2a} \ln |\frac{x-a}{x+a}|+C$</p><p>$\int \frac{1}{\sqrt{x^{2}\pm a^{2}}} dx = \ln| x + \sqrt{x^{2}\pm a^{2}} |+C$</p>]]></content>
     
     
     <categories>
