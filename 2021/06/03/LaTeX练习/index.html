@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
 
 
 
@@ -242,7 +242,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      317 字
+      412 字
     </span>
   
 
@@ -252,7 +252,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      16
        分钟
     </span>
   
@@ -299,7 +299,8 @@
               </p>
             
             <div class="markdown-body">
-              <p><strong>等价无穷小：</strong><br><img src="/img/blog/%E6%95%B0%E5%AD%A6/%E9%AB%98%E6%95%B0/%E7%8B%97%E5%A4%B4.jpg" srcset="/img/loading.gif" lazyload></p>
+              <p><strong>导数：</strong><br>$c{}’=0$<br>$x^{u}{}’=ux^{u-1} $<br>$(\frac{1}{x}){}’=-\frac{1}{x^{2}}$<br>$(\sqrt{x}){}’=\frac{1}{2\sqrt{x}}$<br>$(\frac{1}{\sqrt{x}}){}’=-\frac{1}{2}x^{-\frac{3}{2}}$<br>$(a^{x}){}’=a^{x}lna$<br>$(e^{x}){}’=e^{x}$<br>$(\log_{a}{x}){}’=\frac{1}{xlna}$<br>$(lnx){}’=\frac{1}{x}$<br>$sinx{}’=cosx$<br>$cos{}’=-sinx$<br>$tanx{}’=sec^{2}x$<br>$cotx{}’=-csc^{2}x$<br>$secx{}’=secxtanx$<br>$cscx{}’=-cscxcotx$<br>$arcsinx{}’=\frac{1}{\sqrt{1-x^{2}}}$<br>$arccosx{}’=-\frac{1}{\sqrt{1-x^{2}}}$<br>$acrtanx{}’=\frac{1}{1+x^{2}}$<br>$acrcotx{}’=-\frac{1}{1+x^{2}}$</p>
+<p><strong>等价无穷小：</strong><br><img src="/img/blog/数学/高数/狗头.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><strong>基本积分公式：</strong></p>
 <p>$\int adx=ax+C$</p>
 <p>$\int x^{u}dx= \frac{1}{u+1} x^{u+1} + C$</p>
@@ -620,5 +621,20 @@
 <script  src="/js/boot.js" ></script>
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":250,"height":400},"mobile":{"show":true},"log":false});</script></body>
 </html>
